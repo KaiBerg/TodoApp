@@ -40,7 +40,7 @@ function RenderTodo({
   const toggleSwitch = () =>
     handleUpdate(index, {...todo, completed: !todo.completed});
   return (
-    <View style={{flex: 1, flexDirection: 'row'}}>
+    <View style={{flexWrap: 'nowrap'}}>
       <Text
         onLongPress={() => {
           handleDelete(index);
@@ -49,23 +49,26 @@ function RenderTodo({
         style={[
           styles.todoInfo,
           {
+            margin:  'auto',
             textDecorationLine: todo.completed ? 'line-through' : 'none',
           },
         ]}>
         {todo.name}
-        <Switch
+      </Text>
+      <Switch
           value={todo.completed}
           onValueChange={toggleSwitch}
-          style={{alignSelf: 'flex-end'}}
+          style={{margin:  'auto'}}
+          label='test'
+          
         />
-      </Text>
     </View>
   );
 }
 
 function App(): JSX.Element {
   const isDarkMode = useColorScheme() === 'dark';
-  const [todoName, onTodoTitleChangeText] = React.useState('New Item');
+  const [todoName, onTodoTitleChangeText] = useState('New Item');
   const [todos, setTodos] = useState<Todo[]>([]);
 
   const addTodo = (todo: Todo) => {
